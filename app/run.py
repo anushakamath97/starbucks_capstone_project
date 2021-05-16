@@ -10,9 +10,9 @@ import joblib
 app = Flask(__name__)
 
 # load data
-user_data = pd.read_csv("../data/processed/profile.csv")
-offer_data = pd.read_csv("../data/processed/portfolio.csv")
-completion_time_data = pd.read_csv("../data/processed/completion.csv")
+user_data = pd.read_csv("data/profile.csv")
+offer_data = pd.read_csv("data/portfolio.csv")
+completion_time_data = pd.read_csv("/data/completion.csv")
 
 del user_data["Unnamed: 0"]
 del completion_time_data["Unnamed: 0"]
