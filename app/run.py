@@ -23,7 +23,7 @@ classification_class = ["Customer will likely not like the offer :(", "Customer 
                         "It is useful to send this information to customer."]
 
 # load model
-model = joblib.load("../models/decision_tree.pkl")
+model = joblib.load("../models/decision_tree_2.pkl")
 
 
 # index webpage displays cool visuals and receives user input text for model
