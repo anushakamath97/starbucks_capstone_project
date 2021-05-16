@@ -62,6 +62,8 @@ Your python environment would need the following packages installed. Specifying 
     - Data_Preprocessing
     - Data_Modelling_Prediction
 
+_NOTE: Training each model is commented in Data_Modelling_Prediction notebook and pre-trained models are loaded. Please uncomment for training again._
+
 
 2. Run the following command in the app's directory to run your web app.
     `python run.py`
@@ -108,12 +110,12 @@ The files in this repository have the following structure:
 
 ### Analysis
 
-We have analysed different patterns in data like member joined per year, distribution of channel usage for offers, etc.
+We have analysed different patterns in data like members joined per year, distribution of channel usage for offers, etc.
 
 There is much data where the user has viewed and completed the offer than to where they have completed the offer by chance. This caused an unbalanced dataset for model training.
 
 Customer age distribution is nearly normal which is a good factor as we did not have to account for any bias.
-The data is consistent in terms of customers completing offers only of they had received them.
+The data is consistent in terms if customers completing offers only of they had received them.
 
 We saw that Decision Tree classifier performed best in this scenario compared to other supervised algorithms. The causes and reasoning is discussed in the detail in notebook. We have evaluated models with different metrics perspectives like precision, recall, accuracy. Confusion Matrices are plotted to visualize the performance.
 
