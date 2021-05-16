@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Disasters</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Starbucks Project</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="https://www.udacity.com/">Made with Udacity</a></li>
+                <li><a href="https://github.com/">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<div class="jumbotron">
+    <div class="container">
+        <h1 class="text-center">Starbucks Project</h1>
+        <p class="text-center">Predicting user response to different starbucks offers</p>
+        <hr />
+      
+        <div class="row">
+            <div class="col-lg-12 form-group-lg">
+                <form action="/go" method="get">
+                    <input type="number" class="form-control form-control-lg" name="user_id" min="1" max="17000" placeholder="Enter User ID"><br/>
+                    <label for="sel1">Select Offer (select one):</label>
+                    <select class="form-control form-control-lg" id="sel1" name="offer_id">
+                    	<option value="1">bogo 1</option>
+                    	<option value="2">bogo 2</option>
+                    	<option value="3">informational 1</option>
+                    	<option value="4">bogo 3</option>
+                        <option value="5">discount 1</option>
+                    	<option value="6">discount 2</option>
+                    	<option value="7">discount 3</option>
+                    	<option value="8">informational 2</option>
+                        <option value="9">bogo 4</option>
+                    	<option value="10">discount 4</option>
+                    </select> <br/>
+                    <div class="col-lg-offset-5">
+                        <button type="submit" class="btn btn-lg btn-success" onclick="if(this.form.checkValidity()){this.disabled=true;this.form.submit();}">Predict User Response</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        {% block message %}
+        {% endblock %}
+    </div>
+</div>
+
+<div class="container">
+    {% block content %}
+        <div class="page-header">
+            <h1 class="text-center">Overview of Project</h1><br/>
+            <p class="lead">Starbucks sends various offers to it's customers on a weekly basis to improve their engagement and experience with their products. Different customers respond differently with each offer. The customer behaviour also changes based on the time as they might have different needs at different situations.
+
+            <br/><br/>Through this project we use the simulated customer transactions data to explore behaviour patterns and also try to predict how a customer would respond to different offers.
+
+            <br/><br/> There are three datasets provided.<br/>
+            1. porfolio - Containing offer ids and meta data about each offer.<br/>
+            2. profile - Demographic data for each customer.<br/>
+            3. transcript - Records for transactions, offers received, offers viewed, and offers completed.
+            <br/><br/>We have three types of offers: <br/> 1. Buy One Get One <br/> 2. Discount <br/> 3. Informational <br/>
+            <br/>Starbucks send these offers through various channels like email, web, social and mobile. The plot below shows the 
+            usage of various channels.
+            </p>
+            <div id="graph_0"></div>
+            <p class="lead">
+                From the plot we can observe:<br/>
+                - More bogo and informational offers are sent through email and mobile<br/>
+                - More discount offers are sent through web and email.<br/>
+
+                If we see from the profile dataset we can find the number of members joined each year.
+            </p>
+            <div id="graph_1"></div>
+            <p class="lead">
+            We also have data about the offers received, viewed and completed by customers with the timestamp. Below plot shows 
+            number of offers were received, viewed and completed across offer types.
+            </p>
+            <div id="graph_2"></div>
+            <p class="lead">
+                We combine data from the above mentioned three datasets and assign a class to user response variable.<br/><br/>
+                The definition of user response classes are: <br/>
+                1. User did not make any purchase due to sent offers<br/>
+                2. User completed offer due to sent offer<br/>
+                3. User completed offer by chance (without viewing)<br/>
+                4. User made purchase due to information<br/><br/>
+                
+                The data is trained on five different supervised machine learning algorithms and the best classifier is used to 
+                give the predictions above.<br/><br/>
+
+                Hope you enjoyed learning and playing around with the predictions! Thank you :)
+                
+            </p>
+        </div>
+    {% endblock %}
+</div>
+<br/><br/>
+
+<script type="text/javascript">
+    const graphs = {{ graphJSON | safe }};
+    const ids = {{ ids | safe }};
+    for(let i in graphs) {
+        Plotly.plot(ids[i], graphs[i].data, graphs[i].layout);
+    }
+</script>
+
+</body>
+</html>

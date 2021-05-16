@@ -1,0 +1,40 @@
+{% extends "master.html" %}
+{% block title %}Results{% endblock %}
+
+{% block message %}
+    <hr />
+    <h4 class="text-center"><b><i>User : {{user}}</i></b></h4>
+    <h4 class="text-center"><b><i>Offer : {{offer}}</i></b></h4>
+{% endblock %}
+
+{% block content %}
+    <div class="panel-group">
+    {% for response_class, message in classification_result.items() %}
+        {% if response_class == 0 %}
+        <div class="panel panel-danger">
+            <div class="panel-heading text-center">RESULT</div>
+            <div class="panel-body text-center">{{message}}</div>
+          </div>
+        {% endif %}
+        {% if response_class == 1 %}
+        <div class="panel panel-success">
+            <div class="panel-heading text-center">RESULT</div>
+            <div class="panel-body text-center">{{message}}</div>
+        </div>
+        {% endif %}
+        {% if response_class == 2 %}
+        <div class="panel panel-warning">
+            <div class="panel-heading text-center">RESULT</div>
+            <div class="panel-body text-center">{{message}}</div>
+        </div>
+        {% endif %}
+        {% if response_class == 3 %}
+        <div class="panel panel-primary">
+            <div class="panel-heading text-center">RESULT</div>
+            <div class="panel-body text-center">{{message}}</div>
+        </div>
+        {% endif %}
+    {% endfor %}
+    </div>
+
+{% endblock %}
